@@ -31,3 +31,5 @@ python main.py
 ## Ліцензія
 
 MIT License
+
+## Висновок: Навчився працювати з Git та GitHub.
