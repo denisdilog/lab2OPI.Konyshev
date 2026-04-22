@@ -1,0 +1,49 @@
+@startuml
+class User {
+  - userId : int
+  - username : String
+  - points : int
+  + viewFacts() : void
+  + startBattle() : void
+}
+
+class Admin {
+  - adminLevel : int
+  + manageSystem() : void
+}
+
+class Fact {
+  - factId : int
+  - content : String
+  - category : String
+  + display() : String
+}
+
+class Quiz {
+  - quizId : int
+  - question : String
+  - correctAnswer : String
+  + generateQuiz(f: Fact) : void
+  + checkAnswer(answer: String) : boolean
+}
+
+class Profile {
+  - historyId : int
+  - savedQuizzes : List
+  + updateHistory() : void
+}
+
+class AuthService {
+  + loginViaAPI(credentials: String) : boolean
+}
+
+' Зв'язки
+Admin -up-|> User : Наслідування
+
+User "1" *-- "1" Profile : Композиція
+User "1" -- "*" Fact : Переглядає
+Fact "1" -- "1" Quiz : Асоціація
+User "1" -- "*" Quiz : Проходить
+User ..> AuthService : Використовує
+
+@enduml
