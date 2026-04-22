@@ -1,0 +1,21 @@
+@startuml
+actor "Користувач" as User
+participant ":Система" as Sys
+participant ":QuizService" as Quiz
+participant ":Profile" as Prof
+
+User -> Sys : Надати відповідь на квіз
+activate Sys
+Sys -> Quiz : checkAnswer(відповідь)
+activate Quiz
+Quiz --> Sys : результат: true
+deactivate Quiz
+
+Sys -> Prof : updatePoints(10)
+activate Prof
+Prof --> Sys : бали оновлено
+deactivate Prof
+
+Sys --> User : Відобразити результат "Правильно! +10 балів"
+deactivate Sys
+@enduml
