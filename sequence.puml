@@ -6,16 +6,21 @@ participant ":Profile" as Prof
 
 User -> Sys : Надати відповідь на квіз
 activate Sys
+
 Sys -> Quiz : checkAnswer(відповідь)
 activate Quiz
-Quiz --> Sys : результат: true
+Quiz --> Sys : результат (true/false)
 deactivate Quiz
 
-Sys -> Prof : updatePoints(10)
-activate Prof
-Prof --> Sys : бали оновлено
-deactivate Prof
+alt відповідь правильна (UC-03)
+    Sys -> Prof : updatePoints(10)
+    activate Prof
+    Prof --> Sys : успішно
+    deactivate Prof
+    Sys --> User : "Правильно! +10 балів"
+else відповідь неправильна
+    Sys --> User : "Неправильно. Спробуйте інший факт"
+end
 
-Sys --> User : Відобразити результат "Правильно! +10 балів"
 deactivate Sys
 @enduml
