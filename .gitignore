@@ -14,3 +14,8 @@ env/
 # Системні файли ОС
 .DS_Store
 Thumbs.db
+
+.coverage
+htmlcov/
+__pycache__/
+*.pyc
