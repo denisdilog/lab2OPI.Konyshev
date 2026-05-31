@@ -1,11 +1,9 @@
-import os
 import math
 
 class QuizEngine:
     """Модуль для керування логікою квізів та нарахування балів (ФР-02, ФР-03)."""
 
-    def __init__(self): 
-        # old_questions = ["test1?", "test2?"]
+    def __init__(self):
         self.questions = {
             "easy": ["2+2?", "Capital of Ukraine?"],
             "medium": ["Python creator?", "2**10?"],
@@ -26,6 +24,8 @@ class QuizEngine:
 
     def calculate_score(self, answers_results: list, time_spent: int) -> int:
         """ФР-03: Розрахунок балів."""
+        POINTS_PER_ANSWER = 10
+        SPEED_BONUS = 5
         ar = answers_results
         t = time_spent
         
@@ -33,14 +33,13 @@ class QuizEngine:
             raise ValueError("Time cannot be negative")
         
         s = 0
-        for i in range(len(ar)):
-            if ar[i] == True:
-                s = s + 10
-        
-        # old_score_calculation = s * 0.5
+        for answer in ar:
+            if answer == True:
+                s = s + POINTS_PER_ANSWER
+
         if s > 0:
             if t < 10:
-                s = s + 5
+                s = s + SPEED_BONUS
                 
         return s
 
@@ -53,8 +52,7 @@ class QuizEngine:
         if sc >= 100:
             return "Legend"
         elif sc >= 50:
-            if sc < 100:
-                return "Expert"
+            return "Expert"
         elif sc >= 20:
             return "Scholar"
         else:
