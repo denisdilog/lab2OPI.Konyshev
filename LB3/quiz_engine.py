@@ -59,3 +59,5 @@ class QuizEngine:
             return "Scholar"
         else:
             return "Beginner"
+            
+# Початок Code Review від Євгена.
